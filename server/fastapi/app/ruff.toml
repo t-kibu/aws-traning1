@@ -1,0 +1,11 @@
+# Assume Python 3.12
+target-version = "py312"
+
+exclude = ["tests", "migrations"]
+
+line-length = 120
+
+[lint]
+# We use pyright for lint and type checks
+# Ruff is used instead of black and isort
+select = []

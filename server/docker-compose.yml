@@ -1,0 +1,14 @@
+services:
+  fastapi:
+    build: ./fastapi
+    # volumes等でマウントしていない領域以外のWriteを禁止
+    volumes:
+      - ./fastapi/app:/app
+      - /root/.cache
+    ports:
+      - "7100:7100"
+      - "7101:7101"
+    image: aws_training/fastapi
+    container_name: aws_training_fastapi
+    environment:
+      - ENV=local

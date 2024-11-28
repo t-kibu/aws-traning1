@@ -1,0 +1,8 @@
+{
+  "resource": "/",
+  "path": "/item/9",
+  "httpMethod": "PUT",
+  "requestContext": {
+    "Dummy": "Dummy"
+  }
+}

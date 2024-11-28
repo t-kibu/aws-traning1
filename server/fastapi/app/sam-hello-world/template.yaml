@@ -1,0 +1,99 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-handson
+
+  Sample SAM Template for sam-handson
+
+# Lambda関数及びAPIに共通させるプロパティの設定
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+# スタックに含める Lambda や API Gateway などの AWS リソースの宣言
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    # Lambda関数をDockerで作成
+    Properties:
+      PackageType: Image
+      # コンテナイメージのアーキテクチャを指定しておかないとエラーになるので指定
+      Architectures:
+        - arm64
+      # APIGatewayに紐つける
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+    # Lambda関数をDockerで作成
+    Metadata:
+      DockerTag: python3.9-v1
+      DockerContext: ./hello_world
+      Dockerfile: Dockerfile
+
+  GetItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - arm64
+      Events:
+        HellowWorld:
+          Type: Api
+          Properties:
+            Path: /item
+            Method: get
+    Metadata:
+      DockerTag: python3.9-v1
+      DockerContext: ./item
+      Dockerfile: Dockerfile
+
+  PostItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - arm64
+      Events:
+        HellowWorld:
+          Type: Api
+          Properties:
+            Path: /item
+            Method: post
+    Metadata:
+      DockerTag: python3.9-v1
+      DockerContext: ./item
+      Dockerfile: Dockerfile
+
+  PutItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - arm64
+      Events:
+        HellowWorld:
+          Type: Api
+          Properties:
+            Path: /item/{id}
+            Method: put
+    Metadata:
+      DockerTag: python3.9-v1
+      DockerContext: ./item
+      Dockerfile: Dockerfile
+
+
+# AWS CloudFormation コンソールで表示する出力値の宣言
+Outputs:
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod"
+  HeloWorldFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt HellowWorldFunction.Arn
+  HelloWorldFucntionIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt HelloWorldFunctionRole.Arn

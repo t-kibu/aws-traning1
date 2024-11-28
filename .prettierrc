@@ -1,0 +1,40 @@
+{
+  "singleQuote": true,
+  "semi": false,
+  "tabWidth": 2,
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "*.html",
+      "options": {
+        "printWidth": 120,
+        "bracketSameLine": false
+      }
+    },
+    {
+      "files": "*.javascript",
+      "options": {
+        "printWidth": 120,
+        "semi": true
+      }
+    },
+    {
+      "files": "*.ts",
+      "options": {
+        "printWidth": 120,
+        "semi": true
+      }
+    }
+  ]
+}
